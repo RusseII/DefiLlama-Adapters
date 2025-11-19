@@ -4,25 +4,32 @@ const ADDRESSES = require('../helper/coreAssets.json');
 // HybridDebtMarket contract address (same on all chains via CREATE2)
 const MARKETPLACE_CONTRACT = '0x3333cb20c3C7491CA9fa7281a8B418512d7a9a22';
 
-// Known Euler vaults and common tokens per chain
+// Known payment tokens and Euler vaults per chain
 const KNOWN_TOKENS = {
-  ethereum: [
-    ADDRESSES.ethereum.USDC,
-    ADDRESSES.ethereum.USDT,
-    ADDRESSES.ethereum.DAI,
-    ADDRESSES.ethereum.WETH,
-    ADDRESSES.ethereum.WBTC,
-    // Add Euler vault addresses here as they're deployed
-  ],
-  avax: [
-    ADDRESSES.avax.USDC,
-    ADDRESSES.avax.USDC_e,
-    ADDRESSES.avax.USDT_e,
-    '0x9702230a8ea53601f5cd2dc00fdbc13d4df4a8c7', // USDt (Tether USD)
-    '0x152b9d0FdC40C096757F570A51E494bd4b943E50', // BTC.b (Bitcoin)
-    ADDRESSES.avax.WAVAX,
-    ADDRESSES.avax.WETH_e,
-    ADDRESSES.avax.WBTC_e,
+  ethereum: {
+    paymentTokens: [
+      ADDRESSES.ethereum.USDC,
+      ADDRESSES.ethereum.USDT,
+      ADDRESSES.ethereum.DAI,
+      ADDRESSES.ethereum.WETH,
+      ADDRESSES.ethereum.WBTC,
+    ],
+    vaults: [
+      // Add Euler vault addresses here as they're deployed
+    ]
+  },
+  avax: {
+    paymentTokens: [
+      ADDRESSES.avax.USDC,
+      ADDRESSES.avax.USDC_e,
+      ADDRESSES.avax.USDT_e,
+      '0x9702230a8ea53601f5cd2dc00fdbc13d4df4a8c7', // USDt (Tether USD)
+      '0x152b9d0FdC40C096757F570A51E494bd4b943E50', // BTC.b (Bitcoin)
+      ADDRESSES.avax.WAVAX,
+      ADDRESSES.avax.WETH_e,
+      ADDRESSES.avax.WBTC_e,
+    ],
+    vaults: [
     // Euler vaults on Avalanche (all clusters + Euler Earn)
     '0x9B1DC432150cEF8f129A9eEa3CA8364d0b06904f',
     '0xb4bc9D19D827893e0a21c2F4E7B527A5f8525C3f',
@@ -74,75 +81,134 @@ const KNOWN_TOKENS = {
     '0x5030183B3DD0105d69D7d45595C120Fc4b542EC3',
     '0x03ef14425CF0d7Af62Cdb8D6E0Acb0b0512aE35C',
     '0xe91841F707936faf515ff6d478624A325A4f9199',
-  ],
-  plasma: [
-    ADDRESSES.null, // Native token
-    // Add Plasma tokens as needed
-  ],
-  bsc: [
-    ADDRESSES.bsc.USDC,
-    ADDRESSES.bsc.USDT,
-    ADDRESSES.bsc.DAI,
-    ADDRESSES.bsc.WBNB,
-    ADDRESSES.bsc.BTCB,
-    ADDRESSES.bsc.ETH,
-  ],
-  base: [
-    ADDRESSES.base.USDC,
-    ADDRESSES.base.USDbC,
-    ADDRESSES.base.DAI,
-    ADDRESSES.base.WETH,
-  ],
-  arbitrum: [
-    ADDRESSES.arbitrum.USDC,
-    ADDRESSES.arbitrum.USDT,
-    ADDRESSES.arbitrum.DAI,
-    ADDRESSES.arbitrum.WETH,
-    ADDRESSES.arbitrum.WBTC,
-  ],
-  linea: [
-    ADDRESSES.linea.USDC,
-    ADDRESSES.linea.USDT,
-    ADDRESSES.linea.WETH,
-  ],
-  sonic: [
-    ADDRESSES.sonic.USDC_e,
-    ADDRESSES.sonic.scUSD,
-  ],
-  unichain: [
-    ADDRESSES.null, // Add Unichain tokens as they're used
-  ],
-  swellchain: [
-    ADDRESSES.null, // Add Swellchain tokens as they're used
-  ],
-  tac: [
-    ADDRESSES.null, // Add TAC tokens as they're used
-  ],
-  bob: [
-    ADDRESSES.null, // Add BOB tokens as they're used
-  ],
-  berachain: [
-    ADDRESSES.null, // Add Berachain tokens as they're used
-  ],
+    ]
+  },
+  plasma: {
+    paymentTokens: [
+      ADDRESSES.null, // Native token
+      // Add Plasma tokens as needed
+    ],
+    vaults: []
+  },
+  bsc: {
+    paymentTokens: [
+      ADDRESSES.bsc.USDC,
+      ADDRESSES.bsc.USDT,
+      ADDRESSES.bsc.DAI,
+      ADDRESSES.bsc.WBNB,
+      ADDRESSES.bsc.BTCB,
+      ADDRESSES.bsc.ETH,
+    ],
+    vaults: []
+  },
+  base: {
+    paymentTokens: [
+      ADDRESSES.base.USDC,
+      ADDRESSES.base.USDbC,
+      ADDRESSES.base.DAI,
+      ADDRESSES.base.WETH,
+    ],
+    vaults: []
+  },
+  arbitrum: {
+    paymentTokens: [
+      ADDRESSES.arbitrum.USDC,
+      ADDRESSES.arbitrum.USDT,
+      ADDRESSES.arbitrum.DAI,
+      ADDRESSES.arbitrum.WETH,
+      ADDRESSES.arbitrum.WBTC,
+    ],
+    vaults: []
+  },
+  linea: {
+    paymentTokens: [
+      ADDRESSES.linea.USDC,
+      ADDRESSES.linea.USDT,
+      ADDRESSES.linea.WETH,
+    ],
+    vaults: []
+  },
+  sonic: {
+    paymentTokens: [
+      ADDRESSES.sonic.USDC_e,
+      ADDRESSES.sonic.scUSD,
+    ],
+    vaults: []
+  },
+  unichain: {
+    paymentTokens: [
+      ADDRESSES.null, // Add Unichain tokens as they're used
+    ],
+    vaults: []
+  },
+  swellchain: {
+    paymentTokens: [
+      ADDRESSES.null, // Add Swellchain tokens as they're used
+    ],
+    vaults: []
+  },
+  tac: {
+    paymentTokens: [
+      ADDRESSES.null, // Add TAC tokens as they're used
+    ],
+    vaults: []
+  },
+  bob: {
+    paymentTokens: [
+      ADDRESSES.null, // Add BOB tokens as they're used
+    ],
+    vaults: []
+  },
+  berachain: {
+    paymentTokens: [
+      ADDRESSES.null, // Add Berachain tokens as they're used
+    ],
+    vaults: []
+  },
 };
 
 async function tvl(api) {
   const chain = api.chain;
-  const tokens = KNOWN_TOKENS[chain] || [];
+  const config = KNOWN_TOKENS[chain] || {};
 
-  // Filter out null addresses
-  const validTokens = tokens.filter(t => t !== ADDRESSES.null);
+  // Get payment tokens (regular ERC20 tokens like USDC, USDT, BTC)
+  const paymentTokens = config.paymentTokens || [];
+  const validPaymentTokens = paymentTokens.filter(t => t !== ADDRESSES.null);
 
-  if (validTokens.length === 0) {
+  // Get vault addresses (ERC4626 tokens like Euler vaults)
+  const vaultTokens = config.vaults || [];
+  const validVaults = vaultTokens.filter(t => t !== ADDRESSES.null);
+
+  if (validPaymentTokens.length === 0 && validVaults.length === 0) {
     return {};
   }
 
-  // Sum all token balances held by the marketplace
+  // First, unwrap ERC4626 vault shares to their underlying tokens
+  if (validVaults.length > 0) {
+    const vaultBalances = await api.multiCall({
+      abi: 'erc20:balanceOf',
+      calls: validVaults.map(vault => ({ target: vault, params: [MARKETPLACE_CONTRACT] })),
+    });
+
+    // Only process vaults that have non-zero balances
+    const vaultsWithBalance = validVaults.filter((vault, i) => vaultBalances[i] > 0);
+
+    if (vaultsWithBalance.length > 0) {
+      await api.erc4626Sum({
+        calls: vaultsWithBalance,
+        owner: MARKETPLACE_CONTRACT,
+        permitFailure: true
+      });
+    }
+  }
+
+  // Then sum all payment token balances held by the marketplace
+  // resolveLP: true will handle any LP tokens or remaining ERC4626 tokens
   return sumTokens2({
     api,
     owner: MARKETPLACE_CONTRACT,
-    tokens: validTokens,
-    resolveLP: true, // Auto-resolve LP tokens and ERC4626 vaults to their underlying
+    tokens: validPaymentTokens,
+    resolveLP: true,
   });
 }
 
