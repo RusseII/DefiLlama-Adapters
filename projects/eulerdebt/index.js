@@ -18,6 +18,8 @@ const KNOWN_TOKENS = {
     ADDRESSES.avax.USDC,
     ADDRESSES.avax.USDC_e,
     ADDRESSES.avax.USDT_e,
+    '0x9702230a8ea53601f5cd2dc00fdbc13d4df4a8c7', // USDt (Tether USD)
+    '0x152b9d0FdC40C096757F570A51E494bd4b943E50', // BTC.b (Bitcoin)
     ADDRESSES.avax.WAVAX,
     ADDRESSES.avax.WETH_e,
     ADDRESSES.avax.WBTC_e,
